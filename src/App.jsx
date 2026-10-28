@@ -5,7 +5,7 @@ import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Menu, Plus, X } fr
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import * as THREE from 'three'
-import swingLogo from '../src/images/swinglogo.png' 
+import swingLogo from '../src/images/Swinglogo.png' 
 import img1 from '../src/images/c2.jpg'
 import img2 from '../src/images/c3.jpg'
 import img3 from '../src/images/c4.jpg'
