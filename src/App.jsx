@@ -26,7 +26,7 @@ const GALLERY = [
   { src: img5, title: 'The happy dance', tag: 'Glam Dinners', size: 'tall' },
 ]
 
-const CONTACT_EMAIL = 'hello@swingwithme.events'
+const CONTACT_EMAIL = ''
 
 const EVENT_TYPES = ['Wedding', 'Birthday', 'Corporate event', 'Baby shower', 'Graduation', 'Engagement', 'Other']
 
@@ -592,9 +592,9 @@ export default function App() {
                 <p className="large-copy">
                   Tell us what you're dreaming up. We'll bring the questions, the ideas, and the happy dance.
                 </p>
-                <a className="contact-mail" href={`mailto:${CONTACT_EMAIL}`}>
+                {/* <a className="contact-mail" href={`mailto:${CONTACT_EMAIL}`}>
                   {CONTACT_EMAIL} <ArrowUpRight size={15} />
-                </a>
+                </a> */}
               </div>
               <div className="reveal">
                 <EnquiryForm />
