@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Environment, Sparkles } from '@react-three/drei'
+import { Sparkles } from '@react-three/drei'
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Menu, Plus, X } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import * as THREE from 'three'
-import swingLogo from '../src/images/Swinglogo.png' 
+import swingLogo from '../src/images/Swinglogo.png'
 import img1 from '../src/images/c2.jpg'
 import img2 from '../src/images/c3.jpg'
 import img3 from '../src/images/c4.jpg'
@@ -26,9 +26,6 @@ const GALLERY = [
   { src: img5, title: 'The happy dance', tag: 'Glam Dinners', size: 'tall' },
 ]
 
-// 👇 Form delivery. Leave empty to open the visitor's email app with the enquiry pre-filled,
-// or paste a Formspree / Getform URL (e.g. 'https://formspree.io/f/xxxxxx') to receive submissions directly.
-const FORM_ENDPOINT = ''
 const CONTACT_EMAIL = 'hello@swingwithme.events'
 
 const EVENT_TYPES = ['Wedding', 'Birthday', 'Corporate event', 'Baby shower', 'Graduation', 'Engagement', 'Other']
@@ -47,25 +44,41 @@ function BloomScene() {
       <ambientLight intensity={1.15} />
       <directionalLight position={[3, 4, 5]} intensity={2.2} color="#ffe6fa" />
       <pointLight position={[-3, -1, 2]} intensity={2.3} color="#fe4eda" />
-      <group ref={group} position={[0.3, 0, 0]} />
-      <Sparkles count={70} scale={[5.5, 5.5, 3]} size={2.4} speed={0.25} color="#fe4eda" opacity={0.7} />
-      <Environment preset="studio" />
+      <group ref={group} position={[0.3, 0, 0]}>
+        <Sparkles count={70} scale={[5.5, 5.5, 3]} size={2.4} speed={0.25} color="#fe4eda" opacity={0.7} />
+      </group>
     </>
   )
 }
 
+// If anything in the 3D layer ever fails, hide it quietly instead of breaking the whole page
+class CanvasBoundary extends React.Component {
+  state = { failed: false }
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+  componentDidCatch(err) {
+    console.warn('3D layer disabled:', err)
+  }
+  render() {
+    return this.state.failed ? null : this.props.children
+  }
+}
+
 function ThreeHero() {
   return (
-    <div className="hero-canvas" aria-label="Interactive 3D sparkles">
-      <Canvas
-        camera={{ position: [0, 0, 6.3], fov: 42 }}
-        dpr={[1, 1.6]}
-        gl={{ alpha: true, antialias: true }}
-        eventSource={document.body}
-        eventPrefix="client"
-      >
-        <BloomScene />
-      </Canvas>
+    <div className="hero-canvas" aria-hidden="true">
+      <CanvasBoundary>
+        <Canvas
+          camera={{ position: [0, 0, 6.3], fov: 42 }}
+          dpr={[1, 1.6]}
+          gl={{ alpha: true, antialias: true }}
+          eventSource={document.body}
+          eventPrefix="client"
+        >
+          <BloomScene />
+        </Canvas>
+      </CanvasBoundary>
     </div>
   )
 }
@@ -229,6 +242,7 @@ const INITIAL_FORM = {
   venue: '',
   message: '',
 }
+
 function EnquiryForm() {
   const [form, setForm] = useState(INITIAL_FORM)
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
@@ -238,28 +252,35 @@ function EnquiryForm() {
   const onSubmit = async (e) => {
     e.preventDefault()
     setStatus('sending')
-    
+
     try {
       // 👇 This connects directly to your Netlify function
       const res = await fetch('/.netlify/functions/send-enquiry', {
         method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json', 
-          Accept: 'application/json' 
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify(form),
       })
 
-      const result = await res.json()
+      // Read as text first so an empty or non-JSON response can't crash the form
+      const text = await res.text()
+      let result = {}
+      try {
+        result = text ? JSON.parse(text) : {}
+      } catch {
+        /* ignore non-JSON responses */
+      }
 
-      if (!res.ok || !result.success) {
-        throw new Error(result.message || 'Request failed')
+      if (!res.ok || result.success === false) {
+        throw new Error(result.message || `Request failed (${res.status})`)
       }
 
       setStatus('sent')
       setForm(INITIAL_FORM)
     } catch (error) {
-      console.error("Form submission error:", error)
+      console.error('Form submission error:', error)
       setStatus('error')
     }
   }
@@ -430,14 +451,9 @@ export default function App() {
       <div className="cursor-glow" style={{ transform: `translate3d(${cursor.x - 140}px, ${cursor.y - 140}px, 0)` }} />
 
       <header className={'site-header' + (scrolled ? ' is-scrolled' : '') + (menuOpen ? ' is-open' : '')}>
-        {/* <a className="brand" href="#home" onClick={closeMenu} aria-label="Swing With Me Events home">
-          <span className="brand-mark">sw<span>m</span></span>
-          <span className="brand-name">SWING WITH ME <small>EVENTS & EXPERIENCES</small></span>
-        </a> */}
         <a className="brand" href="#home" onClick={closeMenu} aria-label="Swing With Me Events home">
-  <img src={swingLogo} alt="Swing With Me Events" className="brand-logo" /> {/* 👈 SWAPPED */}
-  {/* <span className="brand-name">SWING WITH ME <small>EVENTS & EXPERIENCES</small></span> */}
-</a>
+          <img src={swingLogo} alt="Swing With Me Events" className="brand-logo" />
+        </a>
 
         <nav className={menuOpen ? 'main-nav is-open' : 'main-nav'}>
           {NAV.map((n) => (
@@ -584,32 +600,33 @@ export default function App() {
                 <EnquiryForm />
               </div>
             </div>
-            <footer className="site-footer">
-  <div className="footer-grid">
-    <div className="footer-brand-col">
-      <img src={swingLogo} alt="Swing With Me Events" className="footer-logo" />
-      <p className="footer-tagline">Crafting moments that linger forever.</p>
-    </div>
-    
-    <div className="footer-col">
-      <h4>Contact</h4>
-      <p><a href="tel:+233559401814">Call: 0559401814</a></p>
-      <p><a href="https://wa.me/233544849283" target="_blank" rel="noreferrer">WhatsApp: 0544849283</a></p>
-      <p><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
-    </div>
 
-    <div className="footer-col">
-      <h4>Socials</h4>
-      <p><a href="https://instagram.com/swingwithme_events" target="_blank" rel="noreferrer">Instagram: @swingwithme_events</a></p>
-      <p><a href="https://tiktok.com/@swingwithme_events" target="_blank" rel="noreferrer">TikTok: @swingwithme_events</a></p>
-      <p><a href="https://www.threads.net/@swingwithme_events" target="_blank" rel="noreferrer">Threads: Swing with me events</a></p>
-    </div>
-  </div>
-  
-  <div className="footer-bottom">
-    <span>© {new Date().getFullYear()} Swing With Me Events & Experiences</span>
-  </div>
-</footer>
+            <footer className="site-footer">
+              <div className="footer-grid">
+                <div className="footer-brand-col">
+                  <img src={swingLogo} alt="Swing With Me Events" className="footer-logo" />
+                  <p className="footer-tagline">Crafting moments that linger forever.</p>
+                </div>
+
+                <div className="footer-col">
+                  <h4>Contact</h4>
+                  <p><a href="tel:+233559401814">Call: 0559401814</a></p>
+                  <p><a href="https://wa.me/233544849283" target="_blank" rel="noreferrer">WhatsApp: 0544849283</a></p>
+                  <p><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
+                </div>
+
+                <div className="footer-col">
+                  <h4>Socials</h4>
+                  <p><a href="https://instagram.com/swingwithme_events" target="_blank" rel="noreferrer">Instagram: @swingwithme_events</a></p>
+                  <p><a href="https://tiktok.com/@swingwithme_events" target="_blank" rel="noreferrer">TikTok: @swingwithme_events</a></p>
+                  <p><a href="https://www.threads.net/@swingwithme_events" target="_blank" rel="noreferrer">Threads: Swing with me events</a></p>
+                </div>
+              </div>
+
+              <div className="footer-bottom">
+                <span>© {new Date().getFullYear()} Swing With Me Events & Experiences</span>
+              </div>
+            </footer>
           </div>
         </section>
       </main>
