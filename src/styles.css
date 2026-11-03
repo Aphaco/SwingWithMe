@@ -822,52 +822,112 @@ main { position: relative; z-index: 3; }
   .gallery-item img { transition: none; }
 }
 /* --- PRICING SECTION --- */
-.pricing-container {
+/* --- ACCORDION PRICING SECTION --- */
+.pricing-accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   margin-top: 2rem;
   width: 100%;
 }
 
-.pricing-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  justify-content: center;
-}
-
-.pricing-tab {
-  background: rgba(255, 255, 255, 0.05);
+.accordion-item {
   border: 1px solid var(--glass-border);
-  color: var(--ink-soft);
-  padding: 0.8rem 1.5rem;
-  border-radius: 999px;
-  font-family: var(--sans);
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s var(--ease);
+  border-radius: 20px;
+  background: var(--glass);
+  overflow: hidden;
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
-.pricing-tab:hover {
-  background: rgba(255, 255, 255, 0.1);
+.accordion-item.is-open {
+  border-color: var(--pink);
+  background: var(--glass-strong);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 40px rgba(254, 78, 218, 0.1);
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--ink);
+  transition: background 0.3s ease;
+}
+
+.accordion-header:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.accordion-title-group h3 {
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
   color: var(--ink);
 }
 
-.pricing-tab.active {
+.accordion-title-group p {
+  color: var(--pink);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.accordion-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  display: grid;
+  place-items: center;
+  color: var(--pink);
+  transition: transform 0.4s ease, background 0.3s ease;
+}
+
+.accordion-item.is-open .accordion-icon {
   background: var(--pink);
-  border-color: var(--pink);
   color: var(--pink-dark-ink);
-  box-shadow: 0 8px 24px rgba(254, 78, 218, 0.35);
 }
 
-.pricing-content {
-  padding: 2.5rem;
-  border-radius: 32px;
-  background: var(--glass-strong);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+.accordion-icon .rotate {
+  transform: rotate(45deg);
 }
 
+/* The magic of CSS Grid for smooth height animation */
+.accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.accordion-item.is-open .accordion-body {
+  grid-template-rows: 1fr;
+}
+
+.accordion-inner {
+  overflow: hidden;
+}
+
+/* Padding moves here so it doesn't break the animation */
+.accordion-item.is-open .accordion-inner {
+  padding: 0 2rem 2rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .accordion-header {
+    padding: 1.2rem;
+  }
+  .accordion-title-group h3 {
+    font-size: 1.4rem;
+  }
+  .accordion-item.is-open .accordion-inner {
+    padding: 0 1.2rem 1.5rem 1.2rem;
+  }
+}
 .pricing-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -1007,4 +1067,220 @@ main { position: relative; z-index: 3; }
   .pricing-tab {
     white-space: nowrap;
   }
+}
+/* --- TESTIMONIALS SECTION --- */
+.testimonials-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.testimonial-card {
+  padding: 2.5rem 2rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.quote-icon {
+  color: var(--pink);
+  opacity: 0.3;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.testimonial-stars {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.testimonial-text {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--ink);
+  flex-grow: 1;
+  margin-bottom: 2rem;
+}
+
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.testimonial-author strong {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--pink);
+}
+
+.testimonial-author span {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 1000px) {
+  .testimonials-container { grid-template-columns: 1fr; }
+}
+
+/* --- SPECIAL FULL PACKAGE 2027 --- */
+.pricing-special {
+  border-color: var(--pink);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 60px rgba(254, 78, 218, 0.2);
+}
+
+.special-package-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.special-bonuses {
+  background: rgba(254, 78, 218, 0.1);
+  border: 1px dashed var(--pink);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.special-bonuses h4 {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--pink);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.bonus-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.bonus-item {
+  font-size: 0.95rem;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.bonus-star {
+  color: var(--pink);
+  font-size: 1.2rem;
+}
+
+.special-price-table {
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.special-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.special-detail-box {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.special-detail-box h5 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.special-detail-box ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.special-detail-box li {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+  .bonus-grid { grid-template-columns: 1fr; }
+  .special-details-grid { grid-template-columns: 1fr; }
+}
+/* --- TESTIMONIAL READ MORE STYLES --- */
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Keeps all cards in the row the same height */
+}
+
+.testimonial-text {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* This is the magic that cuts the text off at 4 lines */
+.testimonial-text.clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Fades the bottom of the clamped text so it looks elegant */
+.testimonial-text.clamped::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2rem;
+  background: linear-gradient(transparent, rgba(24, 6, 20, 0.8)); /* matches your glass bg */
+}
+
+.testimonial-text.expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  margin-bottom: 1.5rem;
+}
+
+.read-more-btn {
+  background: none;
+  border: none;
+  color: var(--pink);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  width: fit-content;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.3s ease;
+}
+
+.read-more-btn:hover {
+  color: var(--ink);
+}
+
+.testimonial-author {
+  margin-top: auto; /* Pushes the author name to the bottom of the card */
 }
