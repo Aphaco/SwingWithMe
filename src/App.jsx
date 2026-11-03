@@ -11,8 +11,8 @@ import img2 from '../src/images/c3.jpg'
 import img3 from '../src/images/c4.jpg'
 import img4 from '../src/images/c5.jpg'
 import img5 from '../src/images/c7.jpg'
-import img6 from '../src/images/c8.jpeg'
-import img7 from '../src/images/c9.jpeg'
+import img6 from '../src/images/call.jpeg'
+import img7 from '../src/images/callback.jpeg'
 
 gsap.registerPlugin(ScrollTrigger)
 
