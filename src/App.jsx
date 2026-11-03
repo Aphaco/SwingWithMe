@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Sparkles } from '@react-three/drei'
-import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Menu, Plus, X } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Menu, Plus, X, Check } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import * as THREE from 'three'
@@ -11,24 +11,129 @@ import img2 from '../src/images/c3.jpg'
 import img3 from '../src/images/c4.jpg'
 import img4 from '../src/images/c5.jpg'
 import img5 from '../src/images/c7.jpg'
+import img6 from '../src/images/C8.jpeg'
+import img7 from '../src/images/C9.jpeg'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const EVENT_PHOTOS = [img1, img2, img3, img4]
 
-// 👇 Gallery tiles. Add as many as you like: { src, title, tag, size }
-// size: 'tall' | 'wide' | '' (square)
 const GALLERY = [
   { src: img1, title: 'Golden hour celebration', tag: 'Weddings', size: 'tall' },
-  { src: img2, title: 'An evening to remember', tag: 'Birthdays', size: 'wide' },
+  { src: img2, title: 'A day to remember', tag: 'Birthdays', size: 'wide' },
   { src: img3, title: 'Details that delight', tag: 'Styling', size: 'wide' },
   { src: img4, title: 'Magic hour', tag: 'Celebrations', size: 'tall' },
   { src: img5, title: 'The happy dance', tag: 'Glam Dinners', size: 'tall' },
+  { src: img6, title: 'Till Sunset', tag: 'Petals & Promises', size: 'tall' },
+  { src: img7, title: 'The Glam', tag: 'Table Talk', size: 'wide' },
 ]
 
 const CONTACT_EMAIL = ''
-
 const EVENT_TYPES = ['Wedding', 'Birthday', 'Corporate event', 'Baby shower', 'Graduation', 'Engagement', 'Other']
+
+// 👇 NEW: Pricing Data from Flyers
+const PACKAGES = [
+  {
+    id: 'standard',
+    name: 'Standard Signature',
+    tagline: 'Pergola Package',
+    items: [
+      'Pergola Tents', 'Ceiling Work (Drapery, Rattans & floral installations)',
+      'Carpet Grass', 'Customized Couple Backdrop', 'Couple Chairs and Table',
+      'Customized Dancefloor', 'Guests Chairs', 'Guests Tables', 'Table Clothes',
+      'Centerpieces (Florals & Table Place Cards)', 'Charger Plates', 'Wine Glasses',
+      'Table Napkins', 'Cake Table', 'Gift Table', '2 Photo Backdrops',
+      '3 Rectangular Tables & Table Clothes for Food', 'Mist fans'
+    ],
+    pricesWithoutLight: [
+      { guests: '50 Guests', price: '15,000' },
+      { guests: '100 Guests', price: '19,000' },
+      { guests: '150 Guests', price: '24,000' },
+      { guests: '200 Guests', price: '29,000' },
+      { guests: '250 Guests', price: '33,000' },
+      { guests: '300 Guests', price: '37,000' }
+    ],
+    pricesWithLight: [
+      { guests: '50 Guests', price: '18,000' },
+      { guests: '100 Guests', price: '22,000' },
+      { guests: '150 Guests', price: '28,000' },
+      { guests: '200 Guests', price: '33,000' },
+      { guests: '250 Guests', price: '37,000' },
+      { guests: '300 Guests', price: '41,000' }
+    ]
+  },
+  {
+    id: 'classic',
+    name: 'Classic Signature',
+    tagline: 'Indoor or Outdoor',
+    items: [
+      'Pergola tents', 'Ceiling work (Drapery, fabric design, rattans & floral installations)',
+      'Carpet grass', 'Customized couple backdrop', 'Couple chairs and table',
+      'Customized dancefloor', 'Guests chairs (rustic OR mid-luxury)', 'Guests tables',
+      'Centerpieces (florals, candle holders, & table place cards)', 'Charger plates',
+      'Wine glasses', 'Champagne OR Water glasses', 'Side plates', 'Table napkins',
+      'Cake table', 'Gift table', 'Entrance decor', 'Welcome signage', '2 Photo backdrops',
+      '3 Rectangular tables & table clothes for food', 'Mist fans',
+      'Lighting (LEDs, low fog, pendants, pyro fireworks)'
+    ],
+    prices: [
+      { guests: '50 guests', price: '24,000' },
+      { guests: '100 guests', price: '31,000' },
+      { guests: '150 guests', price: '37,000' },
+      { guests: '200 guests', price: '40,000' },
+      { guests: '250 guests', price: '46,000' },
+      { guests: '300 guests', price: '51,000' }
+    ]
+  },
+  {
+    id: 'midluxe',
+    name: 'Mid-Luxe Signature',
+    tagline: 'Mixture of Classic & Luxury',
+    items: [
+      'Trusses', 'Ceiling work (Drapery, fabric design, rattans, chandeliers, Pendants & floral installations)',
+      'Carpet grass', 'Customized couple backdrop', 'Couple chairs and table',
+      'Customized dancefloor', 'Guests chairs (Luxury)',
+      'Guests tables (Rustic OR Luxury tables & Regular tables with table clothes)',
+      'Table clothes', 'Centerpieces (florals, candle holders & table place cards)',
+      'Underplates', 'Wine glasses', 'Champagne glasses OR Water glasses', 'Table napkins',
+      'Cake table', 'Gift table', 'Entrance decor', 'Welcome signage', '3 Photo backdrops',
+      '3 Rectangular tables for food', 'Mist fans',
+      'Lighting (LEDs, Moving Heads, Pyro Fireworks, Low Fog)'
+    ],
+    prices: [
+      { guests: '50 guests', price: '30,000' },
+      { guests: '100 guests', price: '41,000' },
+      { guests: '150 guests', price: '49,000' },
+      { guests: '200 guests', price: '58,000' },
+      { guests: '250 guests', price: '66,000' },
+      { guests: '300 guests', price: '72,000' }
+    ]
+  },
+  {
+    id: 'luxe',
+    name: 'Luxe Signature',
+    tagline: 'All Luxury',
+    items: [
+      'Trusses', 'Ceiling work (Drapery, fabric design, rattans, chandeliers & floral installations)',
+      'Carpet grass', 'Customized couple backdrop', 'Couple chairs and table',
+      'Customized dancefloor', 'Guests chairs (Luxury)',
+      'Guests tables (Rustic OR Luxury tables & Regular tables with table clothes)',
+      'Table clothes', 'Centerpieces (florals, candle holders, accessories & table place cards)',
+      'Underplates', 'Wine glasses', 'Champagne glasses OR Water glasses', 'Table napkins',
+      'Cake table', 'Gift table', 'Entrance decor', 'Welcome signage', '4 Photo backdrops',
+      '3 Rectangular tables for food', 'Mist fans',
+      'Lighting (LEDs, Moving Heads, Pendants Lights, Pyro Fireworks, Dry Ice)'
+    ],
+    prices: [
+      { guests: '50 guests', price: '38,000' },
+      { guests: '100 guests', price: '47,000' },
+      { guests: '150 guests', price: '56,000' },
+      { guests: '200 guests', price: '66,000' },
+      { guests: '250 guests', price: '75,000' },
+      { guests: '300 guests', price: '84,000' }
+    ]
+  }
+]
 
 /* ---------------------------------- 3D ---------------------------------- */
 
@@ -51,7 +156,6 @@ function BloomScene() {
   )
 }
 
-// If anything in the 3D layer ever fails, hide it quietly instead of breaking the whole page
 class CanvasBoundary extends React.Component {
   state = { failed: false }
   static getDerivedStateFromError() {
@@ -155,7 +259,7 @@ function ScrollBackground() {
 /* -------------------------------- GALLERY -------------------------------- */
 
 function Gallery() {
-  const [open, setOpen] = useState(null) // index or null
+  const [open, setOpen] = useState(null)
 
   const close = useCallback(() => setOpen(null), [])
   const step = useCallback(
@@ -230,6 +334,91 @@ function Gallery() {
   )
 }
 
+/* ------------------------------- PRICING ------------------------------- */
+
+function Pricing() {
+  const [activeTab, setActiveTab] = useState(PACKAGES[0].id)
+  const activePkg = PACKAGES.find(p => p.id === activeTab)
+
+  return (
+    <div className="pricing-container reveal">
+      {/* TABS */}
+      <div className="pricing-tabs">
+        {PACKAGES.map(pkg => (
+          <button
+            key={pkg.id}
+            className={`pricing-tab ${activeTab === pkg.id ? 'active' : ''}`}
+            onClick={() => setActiveTab(pkg.id)}
+          >
+            {pkg.name}
+          </button>
+        ))}
+      </div>
+
+      {/* CONTENT */}
+      <div className="pricing-content glass">
+        <div className="pricing-header">
+          <h3>{activePkg.name}</h3>
+          <p>{activePkg.tagline}</p>
+        </div>
+
+        <div className="pricing-grid">
+          {/* LEFT: ITEMS LIST */}
+          <div className="pricing-items-col">
+            <h4>What's Included</h4>
+            <ul className="pricing-list">
+              {activePkg.items.map((item, i) => (
+                <li key={i}><Check size={14} className="check-icon" /> {item}</li>
+              ))}
+            </ul>
+          </div>
+
+          {/* RIGHT: PRICE TABLES */}
+          <div className="pricing-tables-col">
+            
+            {activePkg.id === 'standard' ? (
+              <>
+                <div className="price-table">
+                  <h5>Without Lighting</h5>
+                  {activePkg.pricesWithoutLight.map((p, i) => (
+                    <div className="price-row" key={`nolight-${i}`}>
+                      <span>{p.guests}</span>
+                      <span className="price-val">{p.price} GHS</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="price-table highlight">
+                  <h5>With Basic Lighting <br/><small>(LEDs & String Lights)</small></h5>
+                  {activePkg.pricesWithLight.map((p, i) => (
+                    <div className="price-row" key={`light-${i}`}>
+                      <span>{p.guests}</span>
+                      <span className="price-val">{p.price} GHS</span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="price-table">
+                <h5>Indoor or Outdoor</h5>
+                {activePkg.prices.map((p, i) => (
+                  <div className="price-row" key={i}>
+                    <span>{p.guests}</span>
+                    <span className="price-val">{p.price} GHS</span>
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            <div className="pricing-note">
+              * Transportation within Accra included.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 /* ------------------------------- ENQUIRY FORM ------------------------------ */
 
 const INITIAL_FORM = {
@@ -245,7 +434,7 @@ const INITIAL_FORM = {
 
 function EnquiryForm() {
   const [form, setForm] = useState(INITIAL_FORM)
-  const [status, setStatus] = useState('idle') // idle | sending | sent | error
+  const [status, setStatus] = useState('idle')
 
   const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
 
@@ -254,24 +443,15 @@ function EnquiryForm() {
     setStatus('sending')
 
     try {
-      // 👇 This connects directly to your Netlify function
       const res = await fetch('/.netlify/functions/send-enquiry', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify(form),
       })
 
-      // Read as text first so an empty or non-JSON response can't crash the form
       const text = await res.text()
       let result = {}
-      try {
-        result = text ? JSON.parse(text) : {}
-      } catch {
-        /* ignore non-JSON responses */
-      }
+      try { result = text ? JSON.parse(text) : {} } catch { /* ignore */ }
 
       if (!res.ok || result.success === false) {
         throw new Error(result.message || `Request failed (${res.status})`)
@@ -365,6 +545,7 @@ function EnquiryForm() {
 const NAV = [
   { id: 'philosophy', label: 'Our approach' },
   { id: 'services', label: 'What we do' },
+  { id: 'packages', label: 'Packages' },
   { id: 'gallery', label: 'The gallery' },
 ]
 
@@ -384,12 +565,7 @@ export default function App() {
 
     const ctx = gsap.context(() => {
       gsap.from('.hero-kicker, .hero-title-line, .hero-copy, .hero-actions, .scroll-cue', {
-        y: 28,
-        opacity: 0,
-        duration: 1.1,
-        stagger: 0.12,
-        ease: 'power3.out',
-        delay: 0.2,
+        y: 28, opacity: 0, duration: 1.1, stagger: 0.12, ease: 'power3.out', delay: 0.2,
       })
       gsap.from('.hero-canvas', { scale: 0.9, opacity: 0, duration: 1.6, ease: 'power3.out', delay: 0.2 })
 
@@ -398,10 +574,7 @@ export default function App() {
           el,
           { y: 44, opacity: 0 },
           {
-            y: 0,
-            opacity: 1,
-            duration: 1.1,
-            ease: 'power3.out',
+            y: 0, opacity: 1, duration: 1.1, ease: 'power3.out',
             scrollTrigger: { trigger: el, start: 'top 85%', once: true },
           }
         )
@@ -412,20 +585,14 @@ export default function App() {
           el,
           { y: 50, opacity: 0, scale: 0.97 },
           {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 1,
-            delay: (i % 2) * 0.12,
-            ease: 'power3.out',
+            y: 0, opacity: 1, scale: 1, duration: 1, delay: (i % 2) * 0.12, ease: 'power3.out',
             scrollTrigger: { trigger: el, start: 'top 90%', once: true },
           }
         )
       })
     }, root)
 
-    // Highlight the nav tab for the section currently on screen
-    const sections = ['home', 'philosophy', 'services', 'gallery', 'contact']
+    const sections = ['home', 'philosophy', 'services', 'packages', 'gallery', 'contact']
       .map((id) => document.getElementById(id))
       .filter(Boolean)
     const io = new IntersectionObserver(
@@ -447,7 +614,6 @@ export default function App() {
   return (
     <div ref={root} className="site-shell">
       <ScrollBackground />
-
       <div className="cursor-glow" style={{ transform: `translate3d(${cursor.x - 140}px, ${cursor.y - 140}px, 0)` }} />
 
       <header className={'site-header' + (scrolled ? ' is-scrolled' : '') + (menuOpen ? ' is-open' : '')}>
@@ -556,11 +722,29 @@ export default function App() {
           </div>
         </section>
 
-        {/* 04 — GALLERY */}
+        {/* 04 — PACKAGES */}
+        <section id="packages" className="section section-top">
+          <div className="section-inner">
+            <div className="section-index reveal">
+              <span>03 / OUR PACKAGES</span>
+              <span>TAILORED TO YOU</span>
+            </div>
+            <div className="gallery-head reveal">
+              <h2 className="display-heading">
+                Curated experiences
+                <br />
+                <em>for every budget.</em>
+              </h2>
+            </div>
+            <Pricing />
+          </div>
+        </section>
+
+        {/* 05 — GALLERY */}
         <section id="gallery" className="section section-top">
           <div className="section-inner">
             <div className="section-index reveal">
-              <span>03 / THE GALLERY</span>
+              <span>04 / THE GALLERY</span>
               <span>MOMENTS WE LOVED</span>
             </div>
             <div className="gallery-head reveal">
@@ -575,11 +759,11 @@ export default function App() {
           </div>
         </section>
 
-        {/* 05 — BOOKING FORM */}
+        {/* 06 — BOOKING FORM */}
         <section id="contact" className="section section-top">
           <div className="section-inner">
             <div className="section-index reveal">
-              <span>04 / LET'S TALK</span>
+              <span>05 / LET'S TALK</span>
               <span>YOUR MOMENT STARTS HERE</span>
             </div>
             <div className="contact-grid">
@@ -592,9 +776,6 @@ export default function App() {
                 <p className="large-copy">
                   Tell us what you're dreaming up. We'll bring the questions, the ideas, and the happy dance.
                 </p>
-                {/* <a className="contact-mail" href={`mailto:${CONTACT_EMAIL}`}>
-                  {CONTACT_EMAIL} <ArrowUpRight size={15} />
-                </a> */}
               </div>
               <div className="reveal">
                 <EnquiryForm />
@@ -607,14 +788,12 @@ export default function App() {
                   <img src={swingLogo} alt="Swing With Me Events" className="footer-logo" />
                   <p className="footer-tagline">Crafting moments that linger forever.</p>
                 </div>
-
                 <div className="footer-col">
                   <h4>Contact</h4>
                   <p><a href="tel:+233559401814">Call: 0559401814</a></p>
                   <p><a href="https://wa.me/233544849283" target="_blank" rel="noreferrer">WhatsApp: 0544849283</a></p>
                   <p><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
                 </div>
-
                 <div className="footer-col">
                   <h4>Socials</h4>
                   <p><a href="https://instagram.com/swingwithme_events" target="_blank" rel="noreferrer">Instagram: @swingwithme_events</a></p>
@@ -622,7 +801,6 @@ export default function App() {
                   <p><a href="https://www.threads.net/@swingwithme_events" target="_blank" rel="noreferrer">Threads: Swing with me events</a></p>
                 </div>
               </div>
-
               <div className="footer-bottom">
                 <span>© {new Date().getFullYear()} Swing With Me Events & Experiences</span>
               </div>
