@@ -23,9 +23,9 @@ const GALLERY = [
   { src: img2, title: 'A day to remember', tag: 'Birthdays', size: 'wide' },
   { src: img3, title: 'Details that delight', tag: 'Styling', size: 'wide' },
   { src: img4, title: 'Magic hour', tag: 'Celebrations', size: 'tall' },
-  { src: img5, title: 'The happy dance', tag: 'Glam Dinners', size: 'tall' },
+  { src: img5, title: 'Bridal Room Decor', tag: 'Rose Petals Trail', size: 'tall' },
   { src: img6, title: 'Till Sunset', tag: 'Petals & Promises', size: 'tall' },
-  { src: img7, title: 'The Glam', tag: 'Table Talk', size: 'wide' },
+  { src: img7, title: 'Veil & Vows', tag: 'Toast At Noon', size: 'wide' },
 ]
 
 const CONTACT_EMAIL = ''
@@ -35,7 +35,7 @@ const EVENT_TYPES = ['Wedding', 'Birthday', 'Corporate event', 'Baby shower', 'G
 const TESTIMONIALS = [
   {
     quote: "Moooommmy Swiiiing, What Can I say !!!! From the first day I contacted you to meeting you and putting this together within this short period is heartwarming!!! You overdid yourself and understood every concern I raised and offered advice in love. I really appreciate. I asked God for Good wedding vendors because I had limited planning time! And God, God over answered my prayers and delivered !!!! I am truly truly truly Grateful. I loved loved loved it! And all guests complimented your good and beautiful work!",
-    name: "Mrs. Etonam Akosua Tawiah",
+    name: "Mary #GODDIDIT",
     event: "Wedding Client"
   },
   {
@@ -45,7 +45,7 @@ const TESTIMONIALS = [
   },
   {
     quote: "Your decor was nothing short of amazing. You didn’t just deliver what I asked for, you overdelivered and brought my vision to life even better than I imagined. What started as a simple client and vendor relationship quickly became something much more special. When you realized how overwhelmed and stressed I was, planning everything in just one month and two weeks, you didn’t just focus on the work. You stepped in like a big sister, allowed me to vent, encouraged me, and even became a prayer warrior for me. That meant more to me than words can express. Your professionalism, creativity, and genuine care truly set you apart. If you want your decor executed to perfection by someone who truly cares about you and your event, please contact her, you will not regret it. I’m forever grateful. 🤍✨",
-    name: "@_dorcas_ad",
+    name: "Dorcas",
     event: "Wedding Decor"
   },
   {
@@ -55,7 +55,7 @@ const TESTIMONIALS = [
   },
   {
     quote: "I met swing events through a friend after contacting so many others here on ig (FYI some of these Vendors were so rude as if they were doing me a favor 🙊). The reception I got from Lydia was everything, we instantly clicked as if we already knew each other 😊. She was very responsive and very understanding (I can't even count the number of times I changed what we have already agreed on 😅). Above all these personality traits, she is a very talented lady (did u all see our decor for both days? It was fire 👌🏼). @swingwithme_events my Husband and I can't thank u enough, u made both of our days very special, from the coordination to the breathtaking decorations, Lydia may the Almighty God bless u and ur husband for helping us create such wonderful memories ❤️🖤❤️",
-    name: "@joa_nio",
+    name: "Joana",
     event: "#foreverkj2022 Wedding"
   }
 ]
