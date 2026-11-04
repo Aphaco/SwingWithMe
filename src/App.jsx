@@ -40,7 +40,7 @@ const TESTIMONIALS = [
   },
   {
     quote: "Awwwwww Lydia how can I thank u enough....this was beyond what we expected....everyone is talking about this....kyere s3 I haven't been able to sleep the calls keeps coming....kyere s3 the Engagement was off the hook but this wedding I give u a standing ovation whattttt it was beautiful and the coordination was on point.....thank u 4 everything. ur customer service I give it to u 👏👏👏👏❤️❤️❤️❤️❤️",
-    name: "Engagement & Wedding Client",
+    name: "Rachael",
     event: "Wedding Celebration"
   },
   {
@@ -50,7 +50,7 @@ const TESTIMONIALS = [
   },
   {
     quote: "Lydiaaa my darling, God Richly bless you and your craft, you are such a selfless person, I cannot thank you enough for everything you’ve done during this whole process, my constant demands and change of mind every minute, you’ve been soo patient and accommodating. God bless you and your team, it’s my prayer that anything you and your team have lost during this process May you be refilled 10x may your business continue to flourish and expand, you will never lack anything good that life has to offer. thank you soo much.",
-    name: "Grateful Client",
+    name: "Gifty",
     event: "Event Planning & Decor"
   },
   {
