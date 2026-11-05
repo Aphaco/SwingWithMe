@@ -90,7 +90,7 @@ const TESTIMONIALS = [
     event: "Event Planning & Decor"
   },
   {
-    quote: "I met swing events through a friend after contacting so many others here on ig (FYI some of these Vendors were so rude as if they were doing me a favor 🙊). The reception I got from Lydia was everything, we instantly clicked as if we already knew each other 😊. She was very responsive and very understanding (I can't even count the number of times I changed what we have already agreed on 😅). Above all these personality traits, she is a very talented lady (did u all see our decor for both days? It was fire 👌🏼). @swingwithme_events my Husband and I can't thank u enough, u made both of our days very special, from the coordination to the breathtaking decorations, Lydia may the Almighty God bless u and ur husband for helping us create such wonderful memories ❤️🖤❤️",
+    quote: "I met swing events through a friend after contacting so many others here on IG (FYI some of these Vendors were so rude as if they were doing me a favor 🙊). The reception I got from Lydia was everything, we instantly clicked as if we already knew each other 😊. She was very responsive and very understanding (I can't even count the number of times I changed what we have already agreed on 😅). Above all these personality traits, she is a very talented lady (did u all see our decor for both days? It was fire 👌🏼). @swingwithme_events my Husband and I can't thank u enough, u made both of our days very special, from the coordination to the breathtaking decorations, Lydia may the Almighty God bless u and ur husband for helping us create such wonderful memories ❤️🖤❤️",
     name: "Joana",
     event: "#foreverkj2022 Wedding"
   }
