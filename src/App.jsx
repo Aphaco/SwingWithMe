@@ -7,12 +7,23 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import * as THREE from 'three'
 import swingLogo from '../src/images/Swinglogo.png'
 import img1 from '../src/images/c2.jpg'
-import img2 from '../src/images/c3.jpg'
+import img2 from '../src/images/c3.png'
 import img3 from '../src/images/c4.jpg'
 import img4 from '../src/images/c5.jpg'
 import img5 from '../src/images/c7.jpg'
-import img6 from '../src/images/call.jpeg'
+import pac5 from '../src/images/p12.png'
 import img7 from '../src/images/callback.jpeg'
+import pac1 from '../src/images/p1.jpeg'
+import pac2 from '../src/images/p2.jpeg'
+import pac3 from '../src/images/p3.png'
+import pac4 from '../src/images/p13.png'
+import lydiaPhoto from '../src/images/lydia.jpg'
+
+// 👇 IMPORT YOUR NEW SERVICE IMAGES HERE
+// import servicePlanning from '../src/images/planning.jpg'
+// import serviceStyling from '../src/images/IMG_5136.JPG'
+// import serviceDowry from '../src/images/IMG_5793.PNG'
+// import serviceWaiters from '../src/images/waiters.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -20,18 +31,43 @@ const EVENT_PHOTOS = [img1, img2, img3, img4]
 
 const GALLERY = [
   { src: img1, title: 'Golden hour celebration', tag: 'Weddings', size: 'tall' },
-  { src: img2, title: 'A day to remember', tag: 'Birthdays', size: 'wide' },
-  { src: img3, title: 'Details that delight', tag: 'Styling', size: 'wide' },
-  { src: img4, title: 'Magic hour', tag: 'Celebrations', size: 'tall' },
+  { src: img2, title: 'Celebrations', tag: 'A Day To Remember', size: 'wide' },
+  { src: img3, title: 'Traditional & culture', tag: 'Styling', size: 'wide' },
+  // { src: img4, title: 'Magic hour', tag: 'Celebrations', size: 'tall' },
   { src: img5, title: 'Bridal Room Decor', tag: 'Rose Petals Trail', size: 'tall' },
-  { src: img6, title: 'Till Sunset', tag: 'Petals & Promises', size: 'tall' },
-  { src: img7, title: 'Veil & Vows', tag: 'Toast At Noon', size: 'wide' },
+  { src: pac5, title: 'Baby Christening', tag: 'Wonders of the World', size: 'tall' },
+  { src: img7, title: 'Luxury & Detailed', tag: 'Toast At Noon', size: 'tall' },
 ]
 
 const CONTACT_EMAIL = ''
+const CEO_SITE = '' 
+const YOUTUBE_VIDEO_ID = 'BGGFOKTQipQ'
 const EVENT_TYPES = ['Wedding', 'Birthday', 'Corporate event', 'Baby shower', 'Graduation', 'Engagement', 'Other']
 
-// 👇 The 5 Exact Reviews
+// 👇 1. NEW SERVICES ARRAY
+const SERVICES = [
+  {
+    title: 'Planning & Coordination',
+    desc: 'Seamless event management from start to finish, ensuring every detail is handled with precision and care.',
+    image: pac1
+  },
+  {
+    title: 'Event Styling & Decorations',
+    desc: 'Creative concepts, elegant designs and beautiful event transformations tailored to your vision and style.',
+    image: pac2 
+  },
+  {
+    title: 'Dowry Wrapping & Bearers',
+    desc: 'Beautifully packaged and elegantly presented traditional marriage items, adding sophistication to your special occasion.',
+    image: pac3
+  },
+  {
+    title: 'Waiters & Hospitality',
+    desc: 'Professional waiters and hospitality personnel committed to exceptional guest service, courtesy and seamless service delivery.',
+    image: pac4
+  }
+]
+
 const TESTIMONIALS = [
   {
     quote: "Moooommmy Swiiiing, What Can I say !!!! From the first day I contacted you to meeting you and putting this together within this short period is heartwarming!!! You overdid yourself and understood every concern I raised and offered advice in love. I really appreciate. I asked God for Good wedding vendors because I had limited planning time! And God, God over answered my prayers and delivered !!!! I am truly truly truly Grateful. I loved loved loved it! And all guests complimented your good and beautiful work!",
@@ -184,28 +220,28 @@ const PACKAGES = [
       {
         title: 'Event Planning, Coordination & Decoration',
         items: [
-          'Pergola/Trusses', 'Carpet Grass', 'Floral Hangings', 'Rattan Hangings', 
-          'Customized Couple Backdrop', 'Customized Dancefloor', 'Photo Backdrop', 
-          'Couple Chairs & Table', 'Guests Chairs', 'Tables', 'Table Clothes', 
-          'Centerpieces (Florals, Candelabra, Table Place Cards)', 'Underplates', 
-          'Side Plates', 'Wine Glasses/Champagne Glasses', 'Napkins', 'Cake Table', 
+          'Pergola/Trusses', 'Carpet Grass', 'Floral Hangings', 'Rattan Hangings',
+          'Customized Couple Backdrop', 'Customized Dancefloor', 'Photo Backdrop',
+          'Couple Chairs & Table', 'Guests Chairs', 'Tables', 'Table Clothes',
+          'Centerpieces (Florals, Candelabra, Table Place Cards)', 'Underplates',
+          'Side Plates', 'Wine Glasses/Champagne Glasses', 'Napkins', 'Cake Table',
           'Mist Fans', 'Gift Table'
         ]
       },
       {
         title: 'Drinks & Starter (Local Bar)',
         items: [
-          'Alcohol/Non-Alcoholic Drinks', 'Bottle water', 'Can Malt', 'Can Fanta or Can Coke', 
-          'Can BB Cocktail', 'Mini club', 'Smirnoff', 'Asana', 'Sobolo', 
-          'Millet drink', '2 fruit juices', 'Spring rolls', 'Kosua ne meko', 
+          'Alcohol/Non-Alcoholic Drinks', 'Bottle water', 'Can Malt', 'Can Fanta or Can Coke',
+          'Can BB Cocktail', 'Mini club', 'Smirnoff', 'Asana', 'Sobolo',
+          'Millet drink', '2 fruit juices', 'Spring rolls', 'Kosua ne meko',
           'Pooja', 'Nkate cake', 'Plantain chips'
         ]
       },
       {
         title: 'Food',
         items: [
-          'Fried Rice', 'Jollof', 'Waakye', 'Plain Rice', 'Banku', 'Grilled Tilapia', 
-          'Grilled Chicken', 'Fried Fish', 'Spaghetti', 'Salads', 'Chilli Sauce', 
+          'Fried Rice', 'Jollof', 'Waakye', 'Plain Rice', 'Banku', 'Grilled Tilapia',
+          'Grilled Chicken', 'Fried Fish', 'Spaghetti', 'Salads', 'Chilli Sauce',
           'Gravy', 'Black Pepper Sauce', 'Dessert (Abele Walls)', 'Beautiful Buffet Table Set-up'
         ]
       },
@@ -216,15 +252,15 @@ const PACKAGES = [
       {
         title: 'Photography & Videography',
         items: [
-          'Pre-wedding Shoot', 'Event Coverage', 'Soft copies', 'Photo book', 
-          '2 Picture Frames', 'Full Video of the event', 'Trailer Video', 
+          'Pre-wedding Shoot', 'Event Coverage', 'Soft copies', 'Photo book',
+          '2 Picture Frames', 'Full Video of the event', 'Trailer Video',
           'Pendrive (pictures and video)'
         ]
       },
       {
         title: 'Additional Services',
         items: [
-          'Ushers & Waiters', 'Professional DJ with Sound', 'Professional MC', 
+          'Ushers & Waiters', 'Professional DJ with Sound', 'Professional MC',
           'Transportation within Accra', 'Cake (3 Tier)'
         ]
       }
@@ -336,6 +372,207 @@ function ScrollBackground() {
   )
 }
 
+/* ------------------------------ APPROACH TABS ------------------------------ */
+
+const APPROACH_TABS = [
+  {
+    id: 'story',
+    label: 'Our story',
+    body: [
+      'Welcome to Swing With Me Events, where creativity meets excellence and every celebration is thoughtfully designed to tell a unique story.',
+      'Whether it’s an intimate celebration, a traditional marriage, a wedding or a grand corporate event, we bring your vision to life through creativity, professionalism, attention to detail and seamless coordination.',
+      'At Swing With Me Events, your story inspires our creativity, and your satisfaction remains our priority. Let’s swing into action and make your event a masterpiece!',
+    ],
+  },
+  { id: 'vision', label: 'Our vision', body: ['To be the leading creators of bespoke events that reflect our clients’ unique styles and stories.'] },
+  { id: 'mandate', label: 'Our mandate', body: ['To craft bespoke events that exceed client expectations, blending creativity with precision.'] },
+]
+
+function Approach() {
+  const [tab, setTab] = useState('story')
+  const active = APPROACH_TABS.find((t) => t.id === tab)
+  return (
+    <div className="approach glass">
+      <div className="approach-stats">
+        <div><strong>2019</strong><span>Founded</span></div>
+        <div><strong>500+</strong><span>Events delivered</span></div>
+        <div><strong>100%</strong><span>Bespoke</span></div>
+      </div>
+      <div className="approach-tabs" role="tablist">
+        {APPROACH_TABS.map((t) => (
+          <button key={t.id} role="tab" aria-selected={tab === t.id} className={tab === t.id ? 'is-active' : ''} onClick={() => setTab(t.id)}>{t.label}</button>
+        ))}
+      </div>
+      <div className="approach-body" key={active.id}>
+        {active.body.map((p, i) => (i === 0 && active.id !== 'story'
+          ? <p className="large-copy" key={i}>{p}</p>
+          : <p key={i}>{p}</p>))}
+      </div>
+    </div>
+  )
+}
+
+/* -------------------------------- FOUNDER -------------------------------- */
+
+const FOUNDER_ROLES = ['Entrepreneur', 'Event strategist', 'Wife', 'Mother', 'Soldier', 'Midwife']
+
+function Founder() {
+  return (
+    <div className="founder-grid">
+      <div className="founder-photo reveal">
+        <div className="founder-arch"><img src={lydiaPhoto} alt="Lydia Obeng Mintah, Founder & CEO" loading="lazy" /></div>
+        <div className="founder-badge glass"><strong>500+</strong><span>events led</span></div>
+      </div>
+      <div className="founder-copy glass reveal">
+        <p className="founder-role">Founder &amp; CEO</p>
+        <h3 className="founder-name">Lydia Obeng Mintah <small>(Mrs)</small></h3>
+        <p>An award-winning entrepreneur and event strategist, Lydia founded Swing With Me Events in September 2019 to redefine celebrations through thoughtful planning, exceptional coordination and bespoke experiences.</p>
+        <blockquote className="founder-quote">“Every event should reflect the client’s personality, vision and story.”</blockquote>
+        <p>Her work as a soldier and midwife shaped her discipline, attention to detail and calm under pressure, and she leads her team with the same care.</p>
+        <ul className="founder-chips">{FOUNDER_ROLES.map((r) => <li key={r}>{r}</li>)}</ul>
+        {CEO_SITE && <a className="button button-pink" href={CEO_SITE} target="_blank" rel="noreferrer">Visit Lydia’s website <ArrowUpRight size={16} /></a>}
+      </div>
+    </div>
+  )
+}
+
+/* -------------------------------- NEW SERVICES COMPONENT -------------------------------- */
+
+function Services() {
+  return (
+    <div className="services-grid">
+      {SERVICES.map((srv, i) => (
+        <div className="service-card glass reveal" key={i}>
+          <div className="service-image-wrap">
+            <img src={srv.image} alt={srv.title} loading="lazy" />
+          </div>
+          <div className="service-content">
+            <h3>{srv.title}</h3>
+            <p>{srv.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+/* -------------------------------- SHOWREEL -------------------------------- */
+
+function Showreel() {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+
+  const closeShowreel = useCallback(() => {
+    setIsPlaying(false)
+  }, [])
+
+  useEffect(() => {
+    if (!isPlaying) return
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') closeShowreel()
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isPlaying, closeShowreel])
+
+  return (
+    <>
+      <div 
+        className="showreel-card reveal"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <button
+          type="button"
+          className="showreel-thumbnail"
+          onClick={() => setIsPlaying(true)}
+          aria-label="Watch the Swing With Me Events showreel"
+        >
+          <img
+            src="/video/poster.png"
+            alt="Swing With Me Events showreel preview"
+            loading="lazy"
+            className={`showreel-poster ${isHovered ? 'fade-out' : 'fade-in'}`}
+          />
+
+          {isHovered && (
+            <iframe
+              src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${YOUTUBE_VIDEO_ID}`}
+              title="Showreel Preview"
+              className="showreel-preview-iframe"
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+            />
+          )}
+
+          <span className="showreel-thumbnail-overlay" style={{ background: isHovered ? 'transparent' : '' }} />
+
+          <span className="showreel-play-button" style={{ opacity: isHovered ? 0 : 1 }}>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
+
+          <span className="showreel-duration-label">
+            <span className="showreel-live-dot" />
+            WATCH FILM
+          </span>
+        </button>
+
+        <div className="showreel-card-content">
+          <span className="showreel-eyebrow">A MOMENT WITH SWING</span>
+          <h3>See the magic<br /><em>come alive.</em></h3>
+          <p>A glimpse into the beautiful celebrations, thoughtful details and unforgettable moments we create.</p>
+          <button type="button" className="showreel-watch-link" onClick={() => setIsPlaying(true)}>
+            Watch our showreel <ArrowUpRight size={17} />
+          </button>
+        </div>
+
+        <span className="showreel-card-decoration">✳</span>
+      </div>
+
+      {isPlaying && (
+        <div
+          className="showreel-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Swing With Me Events showreel"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeShowreel()
+          }}
+        >
+          <button type="button" className="showreel-modal-close" onClick={closeShowreel} aria-label="Close showreel">
+            <X size={24} />
+          </button>
+
+          <div className="showreel-modal-content">
+            <div className="showreel-modal-heading">
+              <span>SWING WITH ME EVENTS</span>
+              <p>Beautiful moments. Beautifully created.</p>
+            </div>
+
+            <div className="showreel-video-frame">
+              <iframe
+                src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1`}
+                title="Swing With Me Events Showreel"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+
+            <p className="showreel-modal-footer">SWING WITH ME EVENTS & EXPERIENCES</p>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
 /* -------------------------------- GALLERY -------------------------------- */
 
 function Gallery() {
@@ -397,19 +634,18 @@ function Testimonials() {
     <div className="testimonials-container reveal">
       {TESTIMONIALS.map((t, i) => {
         const isExpanded = expandedIndex === i
-        
+
         return (
           <div className={`testimonial-card glass ${isExpanded ? 'is-expanded' : ''}`} key={i}>
             <Quote className="quote-icon" size={32} />
             <div className="testimonial-stars">
               {[...Array(5)].map((_, j) => <Star key={j} size={16} fill="var(--pink)" stroke="var(--pink)" />)}
             </div>
-            
+
             <p className={`testimonial-text ${isExpanded ? 'expanded' : 'clamped'}`}>
               "{t.quote}"
             </p>
-            
-            {/* Read More Button */}
+
             <button className="read-more-btn" onClick={() => toggleExpand(i)}>
               {isExpanded ? 'Read less' : 'Read more'}
             </button>
@@ -575,10 +811,9 @@ function EnquiryForm() {
 /* ---------------------------------- APP ---------------------------------- */
 
 const NAV = [
-  { id: 'philosophy', label: 'Our approach' },
-  { id: 'services', label: 'What we do' },
+  { id: 'founder', label: 'Meet Me' },
+  { id: 'services', label: 'About Us' },
   { id: 'packages', label: 'Packages' },
-  // { id: 'testimonials', label: 'Reviews' },
   { id: 'gallery', label: 'The gallery' },
 ]
 
@@ -607,7 +842,7 @@ export default function App() {
       })
     }, root)
 
-    const sections = ['home', 'philosophy', 'services', 'packages', 'testimonials', 'gallery', 'contact'].map((id) => document.getElementById(id)).filter(Boolean)
+    const sections = ['home', 'philosophy', 'founder', 'services', 'film', 'packages', 'testimonials', 'gallery', 'contact'].map((id) => document.getElementById(id)).filter(Boolean)
     const io = new IntersectionObserver((entries) => entries.forEach((en) => en.isIntersecting && setActiveId(en.target.id)), { rootMargin: '-45% 0px -50% 0px' })
     sections.forEach((s) => io.observe(s))
 
@@ -650,60 +885,75 @@ export default function App() {
           <div className="scroll-cue" aria-hidden="true"><span>Scroll</span><i /></div>
         </section>
 
-        {/* 02 — PHILOSOPHY */}
+        {/* 02 — APPROACH (story / vision / mandate) */}
         <section id="philosophy" className="section">
-          <div className="section-inner reveal">
-            <div className="section-index"><span>01 / A NOTE ON HOW WE GATHER</span><span className="index-flower">✳</span></div>
+          <div className="section-inner">
+            <div className="section-index reveal"><span>01 / A NOTE ON HOW WE GATHER</span><span className="index-flower">✳</span></div>
             <div className="intro-grid">
-              <h2 className="display-heading">Not just an event.<br /><em>A feeling</em> you keep.</h2>
-              <div className="intro-aside glass">
-                <p className="large-copy">The best celebrations don't just look beautiful. They make you feel something.</p>
-                <p>From the first spark of an idea to the last song of the evening, we create experiences that feel considered, personal, and effortlessly memorable.</p>
-              </div>
+              <h2 className="display-heading reveal">Not just an event.<br /><em>A feeling</em> you keep.</h2>
+              <div className="reveal"><Approach /></div>
             </div>
           </div>
         </section>
 
-        {/* 03 — SERVICES */}
-        <section id="services" className="section">
-          <div className="section-inner reveal">
-            <div className="section-index"><span>02 / WHAT WE MAKE POSSIBLE</span><span>THOUGHTFULLY, ALWAYS</span></div>
-            <h2 className="display-heading">Room for every<br /><em>kind of wonderful.</em></h2>
-            <p className="large-copy">Different reasons to gather. One thoughtful approach.</p>
+        {/* 03 — FOUNDER */}
+        <section id="founder" className="section section-top">
+          <div className="section-inner">
+            <div className="section-index reveal"><span>02 / THE VISIONARY</span><span>BEHIND THE BRAND</span></div>
+            <Founder />
           </div>
         </section>
 
-        {/* 04 — PACKAGES */}
+        {/* 04 — SERVICES (NEW LAYOUT) */}
+        <section id="services" className="section section-top">
+          <div className="section-inner reveal">
+            <div className="section-index"><span>03 / WHAT WE MAKE POSSIBLE</span><span>THOUGHTFULLY, ALWAYS</span></div>
+            <h2 className="display-heading">Room for every<br /><em>kind of wonderful.</em></h2>
+            <p className="large-copy" style={{ marginBottom: '3rem' }}>Different reasons to gather. One thoughtful approach.</p>
+            <Services />
+          </div>
+        </section>
+
+        {/* 05 — FILM */}
+        <section id="film" className="section section-top">
+          <div className="section-inner">
+            <div className="section-index reveal"><span>04 / IN MOTION</span><span>SEE IT COME ALIVE</span></div>
+            <div className="gallery-head reveal"><h2 className="display-heading">Watch the<br /><em>magic unfold.</em></h2></div>
+            <Showreel />
+          </div>
+        </section>
+
+        {/* 06 — PACKAGES */}
         <section id="packages" className="section section-top">
           <div className="section-inner">
-            <div className="section-index reveal"><span>03 / OUR PACKAGES</span><span>TAILORED TO YOU</span></div>
+            <div className="section-index reveal"><span>05 / OUR PACKAGES</span><span>TAILORED TO YOU</span></div>
             <div className="gallery-head reveal"><h2 className="display-heading">Curated experiences<br /><em>for every budget.</em></h2></div>
             <Pricing />
           </div>
         </section>
 
-        {/* 05 — TESTIMONIALS */}
+        {/* 07 — TESTIMONIALS */}
         <section id="testimonials" className="section section-top">
           <div className="section-inner">
-            <div className="section-index reveal"><span>04 / KIND WORDS</span><span>FROM OUR CLIENTS</span></div>
+            <div className="section-index reveal"><span>06 / KIND WORDS</span><span>FROM OUR CLIENTS</span></div>
             <div className="gallery-head reveal"><h2 className="display-heading">Stories that<br /><em>stay with us.</em></h2></div>
             <Testimonials />
           </div>
         </section>
 
-        {/* 06 — GALLERY */}
+        {/* 08 — GALLERY */}
         <section id="gallery" className="section section-top">
           <div className="section-inner">
-            <div className="section-index reveal"><span>05 / THE GALLERY</span><span>MOMENTS WE LOVED</span></div>
+            <div className="section-index reveal"><span>07 / THE GALLERY</span><span>MOMENTS WE LOVED</span></div>
             <div className="gallery-head reveal"><h2 className="display-heading">A little glimpse of<br /><em>what we've made.</em></h2><p className="large-copy">Every celebration tells its own story. Here are a few of ours.</p></div>
             <Gallery />
           </div>
         </section>
 
-        {/* 07 — BOOKING FORM */}
+        {/* 09 — BOOKING FORM */}
         <section id="contact" className="section section-top">
           <div className="section-inner">
-            <div className="section-index reveal"><span>06 / LET'S TALK</span><span>YOUR MOMENT STARTS HERE</span></div>
+            <div className="section-index reveal"><span>08 / LET'S TALK</span><span>YOUR MOMENT STARTS HERE</span></div>
             <div className="contact-grid">
               <div className="contact-copy reveal">
                 <h2 className="display-heading">Shall we make<br /><em>something lovely?</em></h2>
@@ -722,6 +972,12 @@ export default function App() {
                   <p><a href="tel:+233559401814">Call: 0559401814</a></p>
                   <p><a href="https://wa.me/233544849283" target="_blank" rel="noreferrer">WhatsApp: 0544849283</a></p>
                   <p><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
+                  
+                  <div className="opening-hours-pill">
+                    <div className="hours-dot" />
+                    <span>Mon – Sat: 9:00 AM – 5:00 PM</span>
+                  </div>
+                  <span className="hours-closed">Sunday: Closed</span>
                 </div>
                 <div className="footer-col">
                   <h4>Socials</h4>
