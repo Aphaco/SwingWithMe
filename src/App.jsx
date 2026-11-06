@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Sparkles } from '@react-three/drei'
-import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Menu, Plus, X, Check, Star, Quote } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Menu, Play, Plus, X, Check, Star, Quote } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import * as THREE from 'three'
@@ -17,22 +17,20 @@ import pac1 from '../src/images/p1.jpeg'
 import pac2 from '../src/images/p2.jpeg'
 import pac3 from '../src/images/p3.png'
 import pac4 from '../src/images/p13.png'
+import pac8 from '../src/images/clean1.jpg'
+import pac9 from '../src/images/altern.jpeg'
 import lydiaPhoto from '../src/images/lydia.jpg'
-
-// 👇 IMPORT YOUR NEW SERVICE IMAGES HERE
-// import servicePlanning from '../src/images/planning.jpg'
-// import serviceStyling from '../src/images/IMG_5136.JPG'
-// import serviceDowry from '../src/images/IMG_5793.PNG'
-// import serviceWaiters from '../src/images/waiters.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
 
 const EVENT_PHOTOS = [img1, img2, img3, img4]
 
 const GALLERY = [
-  { src: img1, title: 'Golden hour celebration', tag: 'Weddings', size: 'tall' },
+  { src: img1, title: 'Walk To Forever', tag: 'Weddings', size: 'tall' },
   { src: img2, title: 'Celebrations', tag: 'A Day To Remember', size: 'wide' },
   { src: img3, title: 'Traditional & culture', tag: 'Styling', size: 'wide' },
+  { src: pac8, title: 'Blooms In Daylight', tag: 'Celebrations', size: 'tall' },
+  { src: pac9, title: 'Aisle In Bloom', tag: 'Weddings', size: 'tall' },
   // { src: img4, title: 'Magic hour', tag: 'Celebrations', size: 'tall' },
   { src: img5, title: 'Bridal Room Decor', tag: 'Rose Petals Trail', size: 'tall' },
   { src: pac5, title: 'Baby Christening', tag: 'Wonders of the World', size: 'tall' },
@@ -40,11 +38,11 @@ const GALLERY = [
 ]
 
 const CONTACT_EMAIL = ''
-const CEO_SITE = '' 
+const CEO_SITE = ''
 const YOUTUBE_VIDEO_ID = 'BGGFOKTQipQ'
+const VIDEO_POSTER = '/video/poster.png'
 const EVENT_TYPES = ['Wedding', 'Birthday', 'Corporate event', 'Baby shower', 'Graduation', 'Engagement', 'Other']
 
-// 👇 1. NEW SERVICES ARRAY
 const SERVICES = [
   {
     title: 'Planning & Coordination',
@@ -54,7 +52,7 @@ const SERVICES = [
   {
     title: 'Event Styling & Decorations',
     desc: 'Creative concepts, elegant designs and beautiful event transformations tailored to your vision and style.',
-    image: pac2 
+    image: pac2
   },
   {
     title: 'Dowry Wrapping & Bearers',
@@ -436,7 +434,7 @@ function Founder() {
   )
 }
 
-/* -------------------------------- NEW SERVICES COMPONENT -------------------------------- */
+/* ------------------------------- SERVICES ------------------------------- */
 
 function Services() {
   return (
@@ -457,82 +455,62 @@ function Services() {
 }
 
 /* -------------------------------- SHOWREEL -------------------------------- */
+/* Big cinematic frame that sits right under the hero.
+   - Nothing from YouTube loads until the visitor hovers (desktop) or taps play.
+   - Click/tap opens the full video in a modal. */
 
 function Showreel() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
 
-  const closeShowreel = useCallback(() => {
-    setIsPlaying(false)
-  }, [])
+  const closeShowreel = useCallback(() => setIsPlaying(false), [])
 
   useEffect(() => {
     if (!isPlaying) return
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') closeShowreel()
-    }
+    const onKey = (e) => { if (e.key === 'Escape') closeShowreel() }
     document.body.style.overflow = 'hidden'
-    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keydown', onKey)
     return () => {
       document.body.style.overflow = ''
-      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keydown', onKey)
     }
   }, [isPlaying, closeShowreel])
 
   return (
     <>
-      <div 
-        className="showreel-card reveal"
+      <div
+        className={'film-frame reveal' + (isHovered ? ' is-hovered' : '')}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <button
-          type="button"
-          className="showreel-thumbnail"
-          onClick={() => setIsPlaying(true)}
-          aria-label="Watch the Swing With Me Events showreel"
-        >
-          <img
-            src="/video/poster.png"
-            alt="Swing With Me Events showreel preview"
-            loading="lazy"
-            className={`showreel-poster ${isHovered ? 'fade-out' : 'fade-in'}`}
-          />
+        <button type="button" className="film-trigger" onClick={() => setIsPlaying(true)} aria-label="Watch the Swing With Me Events film">
+          <img src={VIDEO_POSTER} alt="" className="film-poster" />
 
           {isHovered && (
             <iframe
-              src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${YOUTUBE_VIDEO_ID}`}
-              title="Showreel Preview"
-              className="showreel-preview-iframe"
+              src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&playsinline=1&loop=1&playlist=${YOUTUBE_VIDEO_ID}`}
+              title="Showreel preview"
+              className="film-preview"
               frameBorder="0"
               allow="autoplay; encrypted-media"
+              tabIndex={-1}
             />
           )}
 
-          <span className="showreel-thumbnail-overlay" style={{ background: isHovered ? 'transparent' : '' }} />
+          <span className="film-shade" />
 
-          <span className="showreel-play-button" style={{ opacity: isHovered ? 0 : 1 }}>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M8 5v14l11-7z" />
-            </svg>
+          <span className="film-play" aria-hidden="true">
+            <Play size={30} fill="currentColor" />
           </span>
 
-          <span className="showreel-duration-label">
-            <span className="showreel-live-dot" />
-            WATCH FILM
+          <span className="film-caption">
+            <span className="film-eyebrow"><i className="film-dot" /> THE FILM</span>
+            <span className="film-title">See the magic <em>come alive.</em></span>
+            <span className="film-sub">A glimpse into the celebrations, details and moments we create.</span>
           </span>
         </button>
-
-        <div className="showreel-card-content">
-          <span className="showreel-eyebrow">A MOMENT WITH SWING</span>
-          <h3>See the magic<br /><em>come alive.</em></h3>
-          <p>A glimpse into the beautiful celebrations, thoughtful details and unforgettable moments we create.</p>
-          <button type="button" className="showreel-watch-link" onClick={() => setIsPlaying(true)}>
-            Watch our showreel <ArrowUpRight size={17} />
-          </button>
-        </div>
-
-        <span className="showreel-card-decoration">✳</span>
+        <span className="film-corner film-corner--tl" aria-hidden="true" />
+        <span className="film-corner film-corner--br" aria-hidden="true" />
       </div>
 
       {isPlaying && (
@@ -540,31 +518,26 @@ function Showreel() {
           className="showreel-modal"
           role="dialog"
           aria-modal="true"
-          aria-label="Swing With Me Events showreel"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) closeShowreel()
-          }}
+          aria-label="Swing With Me Events film"
+          onMouseDown={(e) => { if (e.target === e.currentTarget) closeShowreel() }}
         >
-          <button type="button" className="showreel-modal-close" onClick={closeShowreel} aria-label="Close showreel">
+          <button type="button" className="showreel-modal-close" onClick={closeShowreel} aria-label="Close film">
             <X size={24} />
           </button>
-
           <div className="showreel-modal-content">
             <div className="showreel-modal-heading">
               <span>SWING WITH ME EVENTS</span>
               <p>Beautiful moments. Beautifully created.</p>
             </div>
-
             <div className="showreel-video-frame">
               <iframe
                 src={`https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1`}
-                title="Swing With Me Events Showreel"
+                title="Swing With Me Events Film"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
               />
             </div>
-
             <p className="showreel-modal-footer">SWING WITH ME EVENTS & EXPERIENCES</p>
           </div>
         </div>
@@ -842,7 +815,7 @@ export default function App() {
       })
     }, root)
 
-    const sections = ['home', 'philosophy', 'founder', 'services', 'film', 'packages', 'testimonials', 'gallery', 'contact'].map((id) => document.getElementById(id)).filter(Boolean)
+    const sections = ['home', 'film', 'philosophy', 'founder', 'services', 'packages', 'testimonials', 'gallery', 'contact'].map((id) => document.getElementById(id)).filter(Boolean)
     const io = new IntersectionObserver((entries) => entries.forEach((en) => en.isIntersecting && setActiveId(en.target.id)), { rootMargin: '-45% 0px -50% 0px' })
     sections.forEach((s) => io.observe(s))
 
@@ -879,13 +852,20 @@ export default function App() {
             <h1 className="hero-title"><span className="hero-title-line">Some moments</span><span className="hero-title-line title-indent">deserve to <em>linger.</em></span></h1>
             <div className="hero-actions">
               <a className="button button-pink" href="#contact">Let's make a moment <ArrowUpRight size={16} /></a>
-              <a className="button button-ghost" href="#gallery">See our work</a>
+              <a className="button button-ghost" href="#film"><Play size={14} fill="currentColor" /> Watch our film</a>
             </div>
           </div>
           <div className="scroll-cue" aria-hidden="true"><span>Scroll</span><i /></div>
         </section>
 
-        {/* 02 — APPROACH (story / vision / mandate) */}
+        {/* 02 — FILM (right under the hero) */}
+        <section id="film" className="section section-film">
+          <div className="section-inner">
+            <Showreel />
+          </div>
+        </section>
+
+        {/* 03 — APPROACH (story / vision / mandate) */}
         <section id="philosophy" className="section">
           <div className="section-inner">
             <div className="section-index reveal"><span>01 / A NOTE ON HOW WE GATHER</span><span className="index-flower">✳</span></div>
@@ -896,7 +876,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* 03 — FOUNDER */}
+        {/* 04 — FOUNDER */}
         <section id="founder" className="section section-top">
           <div className="section-inner">
             <div className="section-index reveal"><span>02 / THE VISIONARY</span><span>BEHIND THE BRAND</span></div>
@@ -904,7 +884,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* 04 — SERVICES (NEW LAYOUT) */}
+        {/* 05 — SERVICES */}
         <section id="services" className="section section-top">
           <div className="section-inner reveal">
             <div className="section-index"><span>03 / WHAT WE MAKE POSSIBLE</span><span>THOUGHTFULLY, ALWAYS</span></div>
@@ -914,19 +894,10 @@ export default function App() {
           </div>
         </section>
 
-        {/* 05 — FILM */}
-        <section id="film" className="section section-top">
-          <div className="section-inner">
-            <div className="section-index reveal"><span>04 / IN MOTION</span><span>SEE IT COME ALIVE</span></div>
-            <div className="gallery-head reveal"><h2 className="display-heading">Watch the<br /><em>magic unfold.</em></h2></div>
-            <Showreel />
-          </div>
-        </section>
-
         {/* 06 — PACKAGES */}
         <section id="packages" className="section section-top">
           <div className="section-inner">
-            <div className="section-index reveal"><span>05 / OUR PACKAGES</span><span>TAILORED TO YOU</span></div>
+            <div className="section-index reveal"><span>04 / OUR PACKAGES</span><span>TAILORED TO YOU</span></div>
             <div className="gallery-head reveal"><h2 className="display-heading">Curated experiences<br /><em>for every budget.</em></h2></div>
             <Pricing />
           </div>
@@ -935,7 +906,7 @@ export default function App() {
         {/* 07 — TESTIMONIALS */}
         <section id="testimonials" className="section section-top">
           <div className="section-inner">
-            <div className="section-index reveal"><span>06 / KIND WORDS</span><span>FROM OUR CLIENTS</span></div>
+            <div className="section-index reveal"><span>05 / KIND WORDS</span><span>FROM OUR CLIENTS</span></div>
             <div className="gallery-head reveal"><h2 className="display-heading">Stories that<br /><em>stay with us.</em></h2></div>
             <Testimonials />
           </div>
@@ -944,7 +915,7 @@ export default function App() {
         {/* 08 — GALLERY */}
         <section id="gallery" className="section section-top">
           <div className="section-inner">
-            <div className="section-index reveal"><span>07 / THE GALLERY</span><span>MOMENTS WE LOVED</span></div>
+            <div className="section-index reveal"><span>06 / THE GALLERY</span><span>MOMENTS WE LOVED</span></div>
             <div className="gallery-head reveal"><h2 className="display-heading">A little glimpse of<br /><em>what we've made.</em></h2><p className="large-copy">Every celebration tells its own story. Here are a few of ours.</p></div>
             <Gallery />
           </div>
@@ -953,7 +924,7 @@ export default function App() {
         {/* 09 — BOOKING FORM */}
         <section id="contact" className="section section-top">
           <div className="section-inner">
-            <div className="section-index reveal"><span>08 / LET'S TALK</span><span>YOUR MOMENT STARTS HERE</span></div>
+            <div className="section-index reveal"><span>07 / LET'S TALK</span><span>YOUR MOMENT STARTS HERE</span></div>
             <div className="contact-grid">
               <div className="contact-copy reveal">
                 <h2 className="display-heading">Shall we make<br /><em>something lovely?</em></h2>
@@ -972,7 +943,7 @@ export default function App() {
                   <p><a href="tel:+233559401814">Call: 0559401814</a></p>
                   <p><a href="https://wa.me/233544849283" target="_blank" rel="noreferrer">WhatsApp: 0544849283</a></p>
                   <p><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></p>
-                  
+
                   <div className="opening-hours-pill">
                     <div className="hours-dot" />
                     <span>Mon – Sat: 9:00 AM – 5:00 PM</span>
