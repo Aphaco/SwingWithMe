@@ -878,7 +878,7 @@ export default function App() {
         {/* 03 — APPROACH */}
         <section id="philosophy" className="section">
           <div className="section-inner">
-            <div className="section-index reveal"><span>01 / A NOTE ON HOW WE GATHER</span><span className="index-flower">✳</span></div>
+            <div className="section-index reveal"><span>01 / A NOTE ON HOW WE GATHER</span></div>
             <div className="intro-grid">
               <h2 className="display-heading reveal">Not just an event.<br /><em>A feeling</em> you keep.</h2>
               <div className="reveal"><Approach /></div>
