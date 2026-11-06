@@ -7,16 +7,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import * as THREE from 'three'
 import swingLogo from '../src/images/Swinglogo.png'
 import img1 from '../src/images/c2.jpg'
-import img2 from '../src/images/c3.png'
+import img2 from '../src/images/birth.png'
 import img3 from '../src/images/c4.jpg'
 import img4 from '../src/images/c5.jpg'
 import img5 from '../src/images/c7.jpg'
-import pac5 from '../src/images/p12.png'
+import pac5 from '../src/images/baby.png'
 import img7 from '../src/images/callback.jpeg'
 import pac1 from '../src/images/p1.jpeg'
 import pac2 from '../src/images/p2.jpeg'
-import pac3 from '../src/images/p3.png'
-import pac4 from '../src/images/p13.png'
+import pac3 from '../src/images/dowry.png'
+import pac4 from '../src/images/waiters.png'
 import pac8 from '../src/images/clean1.jpg'
 import pac9 from '../src/images/altern.jpeg'
 import lydiaPhoto from '../src/images/lydia.jpg'
@@ -31,7 +31,6 @@ const GALLERY = [
   { src: img3, title: 'Traditional & culture', tag: 'Styling', size: 'wide' },
   { src: pac8, title: 'Blooms In Daylight', tag: 'Celebrations', size: 'tall' },
   { src: pac9, title: 'Aisle In Bloom', tag: 'Weddings', size: 'tall' },
-  // { src: img4, title: 'Magic hour', tag: 'Celebrations', size: 'tall' },
   { src: img5, title: 'Bridal Room Decor', tag: 'Rose Petals Trail', size: 'tall' },
   { src: pac5, title: 'Baby Christening', tag: 'Wonders of the World', size: 'tall' },
   { src: img7, title: 'Luxury & Detailed', tag: 'Toast At Noon', size: 'tall' },
@@ -315,12 +314,26 @@ function ScrollBackground() {
   const [loaded, setLoaded] = useState([])
 
   useEffect(() => {
-    EVENT_PHOTOS.forEach((src, i) => {
+    const load = (i) => {
       const img = new Image()
+      img.decoding = 'async'
       img.onload = () => setLoaded((prev) => (prev.includes(i) ? prev : [...prev, i]))
-      img.src = src
-    })
-  }, [])
+      img.src = EVENT_PHOTOS[i]
+    }
+    load(0)
+  
+    let timer
+    const loadRest = () => {
+      timer = setTimeout(() => EVENT_PHOTOS.slice(1).forEach((_, k) => load(k + 1)), 1200)
+    }
+    if (document.readyState === 'complete') loadRest()
+    else window.addEventListener('load', loadRest, { once: true })
+  
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('load', loadRest)
+    }
+  }, []) 
 
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -455,9 +468,6 @@ function Services() {
 }
 
 /* -------------------------------- SHOWREEL -------------------------------- */
-/* Big cinematic frame that sits right under the hero.
-   - Nothing from YouTube loads until the visitor hovers (desktop) or taps play.
-   - Click/tap opens the full video in a modal. */
 
 function Showreel() {
   const [isPlaying, setIsPlaying] = useState(false)
@@ -858,14 +868,14 @@ export default function App() {
           <div className="scroll-cue" aria-hidden="true"><span>Scroll</span><i /></div>
         </section>
 
-        {/* 02 — FILM (right under the hero) */}
+        {/* 02 — FILM (Right under the hero) */}
         <section id="film" className="section section-film">
           <div className="section-inner">
             <Showreel />
           </div>
         </section>
 
-        {/* 03 — APPROACH (story / vision / mandate) */}
+        {/* 03 — APPROACH */}
         <section id="philosophy" className="section">
           <div className="section-inner">
             <div className="section-index reveal"><span>01 / A NOTE ON HOW WE GATHER</span><span className="index-flower">✳</span></div>
