@@ -10,7 +10,7 @@ const RECIPIENT_EMAILS = [
 ];
 
 const FROM_EMAIL = "Swing With Me Events <enquiries@swingwithmeevents.com>";
-const LOGO_URL = "https://postimg.cc/4Kz0wsVN"; // Ensure this URL points to your live logo
+const LOGO_URL = "https://swingwithmeevents.com/swing-with-me-logo.jpg"; // Ensure this URL points to your live logo
 const WEBSITE_URL = "https://swingwithmeevents.com"; // Your live website
 
 function escapeHtml(value = "") {
