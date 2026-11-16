@@ -4,7 +4,7 @@ const resend = new Resend(process.env.RESEND_MAIL_API_KEY);
 
 // 👇 REPLACE WITH YOUR ACTUAL EMAILS
 const RECIPIENT_EMAILS = [
-//   "swingwithmeevents@gmail.com", 
+"swingwithmeevents@gmail.com", 
 "megadezins@gmail.com"
  
 ];
