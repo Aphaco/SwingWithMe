@@ -202,12 +202,16 @@ export const handler = async (event) => {
     });
 
     if (error) {
-      console.error("Resend error:", error);
+      console.error("RESEND ERROR DETAILS:", error);
+    
       return {
         statusCode: 502,
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           success: false,
-          message: "The email could not be sent.",
+          message: error.message || "Resend rejected the email.",
         }),
       };
     }
