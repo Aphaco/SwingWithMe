@@ -36,7 +36,7 @@ const GALLERY = [
   { src: img7, title: 'Luxury & Detailed', tag: 'Toast At Noon', size: 'tall' },
 ]
 
-const CONTACT_EMAIL = ''
+const CONTACT_EMAIL = 'swingwithmeevents.com'
 const CEO_SITE = ''
 const YOUTUBE_VIDEO_ID = 'BGGFOKTQipQ'
 const VIDEO_POSTER = '/video/poster.png'

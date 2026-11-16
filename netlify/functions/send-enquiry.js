@@ -9,9 +9,9 @@ const RECIPIENT_EMAILS = [
  
 ];
 
-const FROM_EMAIL = "Swing With Me Events <enquiries@mail.escapeeventsgh.com>";
+const FROM_EMAIL = "Swing With Me Events <enquiries@swingwithmeevents.com>";
 const LOGO_URL = "https://postimg.cc/4Kz0wsVN"; // Ensure this URL points to your live logo
-const WEBSITE_URL = "https://swingwithme-events.netlify.app/"; // Your live website
+const WEBSITE_URL = "https://swingwithmeevents.com"; // Your live website
 
 function escapeHtml(value = "") {
   return String(value)
